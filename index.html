@@ -20,18 +20,23 @@
                 <hr>
                     
                 <article id="cardbody" class="cardbody pb-3">
-                    <div id="score-keeper"></div>
 
                     <div id="description" class="card-text mb-3">Think your a true Gunner? Let's see how much you really know.</div>
-
-                    <div id="choice-buttons">
-                        <button id="btn0"><span id="choice0"></span></button>
-                        <button id="btn1"><span id="choice1"></span></button>
-                        <button id="btn2"><span id="choice2"></span></button>
-                        <button id="btn3"><span id="choice3"></span></button>
+                    
+                    <div id="choices"></div>
+                    <div id="choice-buttons" class="col-lg-12 col-md-12 col-sm-12 col-12 justify-content-center">
+                        <button class="col-lg-5 col-md-5 col-sm-5 col-5 justify-content-end" id="choice-zero"></button>
+                        
+                        <button class="col-lg-5 col-md-5 col-sm-5 col-5 justify-content-end" id="choice-one"></button>
+                        
+                        <button class="col-lg-5 col-md-5 col-sm-5 col-5 justify-content-start" id="choice-two"></button>
+                        
+                        <button class="col-lg-5 col-md-5 col-sm-5 col-5 justify-content-start" id="choice-three"></button>
                     </div>
 
-                    <button id="btn" class="justify-content-center mt-5">Take the Quiz</button>
+                    <button id="btn" class="mt-5">Take the Quiz</button>
+
+                    <div id="time"></div>
 
                 </article>            
             </div>
@@ -42,3 +47,4 @@
     <script src=script.js></script>
 </body>
 </html>
+
