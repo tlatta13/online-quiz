@@ -50,7 +50,7 @@ var questionArray = [
     },
   ];
 
-var secondsLeft = 10;
+var secondsLeft = 60;
 buttonEl.addEventListener("click", function(event) {
     event.preventDefault();
     // nextQuestion();
@@ -60,20 +60,13 @@ buttonEl.addEventListener("click", function(event) {
         secondsLeft--;
     if(secondsLeft < 0) {
         clearInterval(timerInterval);
+        descriptionEl.textContent = "Times Up. You scored: 0";
     }
     }, 1000);   
 });
 
-  function end() {
-    descriptionEl.textContent = "";
-    // answerEl.textContent = "";
-    buttonEl.textContent = "Start Over";
-    count = 0
-  }
-
   
   function checker(event) { 
-
     if(questionArray[count].correct === event.target.value) {
           alert("That's Correct");
       } else {
@@ -88,13 +81,13 @@ buttonEl.addEventListener("click", function(event) {
         buttonEl.style.visibility = "hidden"
     }
 
-    if(count === questionArray.length) {
-        end()
-        // return
+    if(count == questionArray.length) {
+        descriptionEl.textContent = "";
+        choiceDiv.textContent = "";
+        end();
     }
 
     // Display Questions
-    //cardBodyEl.textContent = ""
     descriptionEl.textContent = questionArray[count].question;
     console.log(count)
     choiceDiv.textContent = ""
@@ -108,6 +101,12 @@ buttonEl.addEventListener("click", function(event) {
         answerBtn.textContent = answer[i]
         choiceDiv.appendChild(answerBtn);
     }
-}
+    }
+
+    function end() {
+        descriptionEl.textContent = "You scored: " + secondsLeft;
+        buttonEl.textContent = "Start Over";
+        count = 0
+    }
 
 buttonEl.addEventListener("click", nextQuestion)

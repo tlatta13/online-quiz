@@ -28,7 +28,8 @@ button {
     font-size: 18px;
     border: darkred;
     border-width: 2px;
-    margin: 0 auto;
-    display: inline;
-    padding: 5px 5px;
+    margin: 10px auto;
+    display: block;
+    padding: 10px 5px;
+    width: 50%;
 }
