@@ -68,10 +68,7 @@ buttonEl.addEventListener("click", function(event) {
 
   
 function end() {
-    descriptionEl.textContent = "You scored: " + secondsLeft;
-    choiceDiv.textContent = "";
-    timeEl.textContent = "";
-    timerInterval = stop;
+    buttonEl.style.visibility = "show"
     buttonEl.textContent = "Start Over";
     count = 0
 }
@@ -93,6 +90,12 @@ function nextQuestion() {
 
     if(count === questionArray.length) {
         choiceDiv.textContent = prompt("Enter you initials: ");
+        descriptionEl.textContent = "You scored: " + secondsLeft;
+        choiceDiv.textContent = "";
+        timeEl.textContent = "";
+        timerInterval = stop;
+        buttonEl.textContent = "Start Over";
+        count = 0
 
     }
 
