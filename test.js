@@ -1,12 +1,13 @@
 var cardBodyEl = document.getElementById("cardbody");
 var descriptionEl = document.getElementById("description");
-// var answerEl = document.getElementById("choices");
+var answerEl = document.getElementById("choices");
 var choiceDiv = document.getElementById("choice-buttons");
 var buttonEl = document.getElementById("btn");
-// var scoreKeeperEl = document.getElementById("score-keeper");
-var timeEl = document.getElementById("time");
+var scoreKeeperEl = document.getElementById("score-keeper");
+
 
 var count = 0
+var score = 0
 
 var questionArray = [
     // Question 1
@@ -15,8 +16,8 @@ var questionArray = [
       answers: ["A: 1886",
         "B: 1912",
         "C: 1893",
-        "D: 1907"],
-      correct: "A: 1886",
+        "D: "],
+      correct: "A: 1886"
     },
     
     // Question 2
@@ -26,7 +27,7 @@ var questionArray = [
         "B: Thierry Henry",
         "C: Ian Write",
         "D: Robin Van Persie"],
-      correct: "B: Thierry Henry",
+      correct: "a"
     },
 
     // Question 3 
@@ -36,7 +37,7 @@ var questionArray = [
         "B: Don How",
         "C: Arsene Wenger",
         "D: Stewart Housten"],
-      correct: "C: Arsene Wenger",
+      correct: "C: Arsene Wenger"
     },
 
     // Question 4
@@ -46,68 +47,73 @@ var questionArray = [
         "B: 18",
         "C: 13",
         "D: 9"],
-      correct: "C: 13",
+      correct: "C: 13"
     },
   ];
 
-var secondsLeft = 10;
-buttonEl.addEventListener("click", function(event) {
-    event.preventDefault();
-    // nextQuestion();
 
-    var timerInterval = setInterval(function() {
-        timeEl.textContent = "Time left: " + secondsLeft;
-        secondsLeft--;
-    if(secondsLeft < 0) {
-        clearInterval(timerInterval);
-    }
-    }, 1000);   
-});
+// buttonEl.addEventListener("click", function(event) {
+//     var secondsLeft = 40;
+//     event.preventDefault();
+//     // nextQuestion();
 
-  function end() {
+//     var timerInterval = setInterval(function() {
+//         timeEl.textContent = "Time left: " + secondsLeft;
+//         secondsLeft--;
+//     if(secondsLeft === 0) {
+//         clearInterval(timerInterval);
+//     }
+//     }, 1000);   
+// });
+
+  function end () {
     descriptionEl.textContent = "";
     // answerEl.textContent = "";
     buttonEl.textContent = "Start Over";
     count = 0
   }
 
-  
-  function checker(event) { 
-
-    if(questionArray[count].correct === event.target.value) {
+  function checker(position) {
+      if (questionArray[count].correct === questionArray[count].answers(position)) {
           alert("That's Correct");
       } else {
-          secondsLeft -= 10;
+          alert("That's wrong")
       }
-      count++
+      questionArray++
       nextQuestion();
   }
   
   function nextQuestion() {
+    // if(count != 0) {
+    //     choiceDiv.style.visibility = "hidden";
+    // }
+    
     if(count === 0) {
+        buttonEl.textContent = "Next Question";
         buttonEl.style.visibility = "hidden"
     }
 
     if(count === questionArray.length) {
         end()
-        // return
+        return
     }
 
-    // Display Questions
-    //cardBodyEl.textContent = ""
     descriptionEl.textContent = questionArray[count].question;
-    console.log(count)
-    choiceDiv.textContent = ""
-    // Display Answer Choices
+    // answerEl.textContent = questionArray[count].answers;
+
     var answer = questionArray[count].answers;
     for (var i = 0; i < answer.length; i++) {
         var answerBtn = document.createElement("button");
-        answerBtn.setAttribute('id', 'choices');
-        answerBtn.setAttribute('value', answer[i]);
-        answerBtn.onclick = checker;
+        answerBtn.setAttribute('class', 'choices');
+        answerBtn.onclick = function () {
+            checker(i);
+        }
         answerBtn.textContent = answer[i]
         choiceDiv.appendChild(answerBtn);
     }
+
+    count++;
 }
 
-buttonEl.addEventListener("click", nextQuestion)
+
+  buttonEl.addEventListener("click", nextQuestion)
