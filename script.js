@@ -61,11 +61,21 @@ buttonEl.addEventListener("click", function(event) {
     if(secondsLeft < 0) {
         clearInterval(timerInterval);
         descriptionEl.textContent = "Times Up. You scored: 0";
+        choiceDiv.textContent = "";
     }
     }, 1000);   
 });
 
   
+function end() {
+    descriptionEl.textContent = "You scored: " + secondsLeft;
+    choiceDiv.textContent = "";
+    timeEl.textContent = "";
+    timerInterval = stop;
+    buttonEl.textContent = "Start Over";
+    count = 0
+}
+
   function checker(event) { 
     if(questionArray[count].correct === event.target.value) {
           alert("That's Correct");
@@ -76,15 +86,14 @@ buttonEl.addEventListener("click", function(event) {
       nextQuestion();
   }
   
-  function nextQuestion() {
+function nextQuestion() {
     if(count === 0) {
         buttonEl.style.visibility = "hidden"
     }
 
-    if(count == questionArray.length) {
-        descriptionEl.textContent = "";
-        choiceDiv.textContent = "";
-        end();
+    if(count === questionArray.length) {
+        choiceDiv.textContent = prompt("Enter you initials: ");
+
     }
 
     // Display Questions
@@ -101,12 +110,6 @@ buttonEl.addEventListener("click", function(event) {
         answerBtn.textContent = answer[i]
         choiceDiv.appendChild(answerBtn);
     }
-    }
-
-    function end() {
-        descriptionEl.textContent = "You scored: " + secondsLeft;
-        buttonEl.textContent = "Start Over";
-        count = 0
-    }
+}
 
 buttonEl.addEventListener("click", nextQuestion)
